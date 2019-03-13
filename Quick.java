@@ -43,19 +43,19 @@ public class Quick{
     }
 
   public static int quickselect(int[] data, int k){
-    partition(data, 0, data.length - 1);
-    int num = 1;
-    int prev = data[0];
-    for (int x = 1; x < data.length; x++){
-      if (num == k){
-        return data[x];
+    int p = partition(data, 0, data.length - 1);
+    int start = p;
+    int end = p;
+    while (k != p){
+      if (p < k){
+        start++;
       }
       if (data[x] != prev){
-        num++;
-        prev = data[x];
+        end--;
       }
+      p = partition(data, start, end);
     }
-    return 0;
+    return data[k];
 
   }
 }
