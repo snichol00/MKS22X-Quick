@@ -96,6 +96,14 @@ public class Quick{
   }
 
   public static void quicksort(int[] data){
-
+    quicksort(data, 0, data.length - 1);
   }
+
+  public static void quicksort(int[] data, in low, int high){
+    if (low >= high){
+      return;
+    }
+    p = partition(data, low, high);
+    quicksort(data, 0, p);
+    quicksort(data, p, data.length - 1);
 }
