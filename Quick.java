@@ -17,7 +17,7 @@ public class Quick{
       }
 
       if (data[start] > data[end] &&
-          data[start] < data[(end + start) / 2] || 
+          data[start] < data[(end + start) / 2] ||
           data[start] < data[end] &&
           data[start] > data[(end + start) / 2]){
         pVal = data[start];
@@ -56,11 +56,13 @@ public class Quick{
       }
       //System.out.println("loop finished");
       //System.out.println(Arrays.toString(data));
-      //once sorted, you need to switch the pivot back into place
+
+      //if start went out of bounds, subtract
       if (start >= data.length){
         start--;
       }
 
+      //once sorted, you need to switch the pivot back into place
       if (data[start] >= pVal){
         data[0] = data[start - 1];
         data[start - 1] = pVal;
@@ -74,9 +76,11 @@ public class Quick{
     }
 
   public static int quickselect(int[] data, int k){
+    //partitions array
     int p = partition(data, 0, data.length - 1);
     int start = p;
     int end = p;
+    // will stop at kth val
     while (k != p){
       if (p < k){
         start = p + 1;
@@ -84,9 +88,14 @@ public class Quick{
       else{
         end = p - 1;
       }
+      // partitions appropriate array
       p = partition(data, start, end);
     }
+    //return kth value
     return data[k];
+  }
+
+  public static void quicksort(int[] data){
 
   }
 }
