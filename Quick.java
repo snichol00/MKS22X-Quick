@@ -42,8 +42,10 @@ public class Quick{
       }
       //System.out.println(Arrays.toString(data));
       //once start and end are equal, array has been partitioned
-      while (start != end && start < data.length && end >= 0){
-        if (data[start] > pVal || data[start] == pVal){
+      while (start != end){
+        int repeats = r.nextInt(2);
+
+        if (data[start] > pVal || data[start] == pVal || repeats == 1){
           //swap start and end
           int temp = data[start];
           data[start] = data[end];
@@ -63,7 +65,7 @@ public class Quick{
       }*/
 
       //once sorted, you need to switch the pivot back into place
-      if (data[start] >= pVal && start > 0){
+      if (data[start] <= pVal){
         data[0] = data[start - 1];
         data[start - 1] = pVal;
         return start - 1;
@@ -104,7 +106,7 @@ public class Quick{
       return;
     }
     int p = partition(data, low, high);
-    quicksort(data, 0, p);
+    quicksort(data, start, p - 1);
     quicksort(data, p, data.length - 1);
   }
 }
