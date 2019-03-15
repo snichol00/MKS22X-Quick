@@ -6,8 +6,8 @@ public class Quick{
     public static int partition(int [] data, int start, int end){
       //choose random pivot
       Random r = new Random();
-      int pIdx = r.nextInt(data.length);
-      int pVal = data[pIdx];
+      int pIdx;
+      int pVal;
 
       if (data.length == 0){
         throw new IllegalArgumentException();
@@ -16,6 +16,7 @@ public class Quick{
         return start;
       }
 
+      //optimization for choosing pivot
       if (data[start] > data[end] &&
           data[start] < data[(end + start) / 2] ||
           data[start] < data[end] &&
@@ -32,20 +33,24 @@ public class Quick{
       }
       else{
         pIdx = (end + start) / 2;
+        pVal = data[pIdx];
       }
-      //swap pivot to be first int
-      if (start != pIdx){
-        data[pIdx] = data[start];
-        data[start] = pVal;
-        pIdx = start;
-        start ++;
-      }
+      //swap pivot to be first idx
+      data[pIdx] = data[start];
+      data[start] = pVal;
+      pIdx = start;
+      start ++;
       //System.out.println(Arrays.toString(data));
       //once start and end are equal, array has been partitioned
       while (start != end){
-        int repeats = r.nextInt(2);
+        int flip = -1;
 
-        if (data[start] > pVal || data[start] == pVal || repeats == 1){
+        //50% chance of flipping to other side
+        if (pVal == data[start]){
+          flip = r.nextInt(2);
+        }
+
+        if (data[start] > pVal || data[start] == pVal || flip == 1){
           //swap start and end
           int temp = data[start];
           data[start] = data[end];
@@ -65,7 +70,7 @@ public class Quick{
       }*/
 
       //once sorted, you need to switch the pivot back into place
-      if (data[start] <= pVal){
+      if (data[start] >= pVal){
         data[0] = data[start - 1];
         data[start - 1] = pVal;
         return start - 1;
@@ -106,7 +111,7 @@ public class Quick{
       return;
     }
     int p = partition(data, low, high);
-    quicksort(data, start, p - 1);
+    quicksort(data, low, p - 1);
     quicksort(data, p, data.length - 1);
   }
 }
