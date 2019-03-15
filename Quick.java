@@ -16,14 +16,14 @@ public class Quick{
     return start;
   }
 
-  if (data[start] > data[end] && data[start] < data[(end+start)/2] || data[start] < data[end] && data[start] > data[(end+start)/2]){
+  if (data[start] > data[end] && data[start] < data[(end + start) / 2] || data[start] < data[end] && data[start] > data[(end + start) / 2]){
     pVal = data[start];
     pIdx = start;
-  }else if (data[end] > data[start] && data[end] < data[(end+start)/2] || data[end] < data[start] && data[end] > data[(end+start)/2]){
+  }else if (data[end] > data[start] && data[end] < data[(end + start) / 2] || data[end] < data[start] && data[end] > data[(end + start) / 2]){
     pVal = data[end];
     pIdx = end;
   }else{
-    pIdx = (end+start)/2; //refrain from using 0s and data.length - 1, bc in quicksort we do subsets not whole array
+    pIdx = (end + start) / 2;
     pVal = data[pIdx];
   }
   //swap pivot to be first int
@@ -95,10 +95,15 @@ public class Quick{
   }
 
   public static void quicksort(int[] data, int low, int high){
+    //base case
     if (low >= high){
+      //end call
       return;
     }
+
     int p = partition(data, low, high);
+
+    //call sort on new partitions
     quicksort(data, low, p - 1);
     quicksort(data, p + 1, high);
   }
