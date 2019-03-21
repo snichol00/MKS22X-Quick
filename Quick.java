@@ -100,6 +100,10 @@ public class Quick{
       //end call
       return;
     }
+    if (data.length < 43){
+      insertionsort(data, low, high);
+    }
+    else{
 
     int p = partition(data, low, high);
 
@@ -107,4 +111,16 @@ public class Quick{
     quicksort(data, low, p - 1);
     quicksort(data, p + 1, high);
   }
+}
+
+public static void insertionsort(int[] data, int lo, int hi){
+  for (int x = lo + 1; x <= hi; x++){
+    int xval = data[x];
+    int y = x - 1;
+    for (; y >= lo && xval < data[y]; y--){
+      data[y+1] = data[y];
+    }
+    data[y+1] = xval;
+  }
+}
 }
