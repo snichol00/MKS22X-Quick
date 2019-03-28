@@ -19,10 +19,12 @@ public class Quick{
   if (data[start] > data[end] && data[start] < data[(end + start) / 2] || data[start] < data[end] && data[start] > data[(end + start) / 2]){
     pVal = data[start];
     pIdx = start;
-  }else if (data[end] > data[start] && data[end] < data[(end + start) / 2] || data[end] < data[start] && data[end] > data[(end + start) / 2]){
+  }
+  else if (data[end] > data[start] && data[end] < data[(end + start) / 2] || data[end] < data[start] && data[end] > data[(end + start) / 2]){
     pVal = data[end];
     pIdx = end;
-  }else{
+  }
+  else{
     pIdx = (end + start) / 2;
     pVal = data[pIdx];
   }
@@ -42,21 +44,19 @@ public class Quick{
       flip = r.nextInt(2);
     }
 
-    if (data[start] > pVal || flip == 0){
+    if (data[start] < pVal || flip == 0){
+      start++;
+    }
+    else if (data[start] > pVal || flip == 1){
       //swap start and end
       int temp = data[start];
       data[start] = data[end];
       data[end] = temp;
       end--;
     }
-    else if (data[start] < pVal || flip == 1){
-      start++;
-    }
   }
-  //System.out.println("loop finished");
-  //System.out.println(Arrays.toString(data));
-  //once sorted, you need to switch the pivot back into place
 
+  //once sorted, you need to switch the pivot back into place
   if (pVal > data[start]){
     data[pIdx] = data[start];
     data[start] = pVal;
@@ -73,14 +73,14 @@ public class Quick{
   public static int quickselect(int[] data, int k){
     //partitions array
     int p = partition(data, 0, data.length - 1);
-    int start = p;
-    int end = p;
+    int start = 0;
+    int end = data.length - 1;
     // will stop at kth val
     while (k != p){
       if (p < k){
         start = p + 1;
       }
-      else{
+      if (p > k){
         end = p - 1;
       }
       // partitions appropriate array
@@ -100,7 +100,7 @@ public class Quick{
       //end call
       return;
     }
-    if (data.length < 43){
+    if (data.length < 47){
       insertionsort(data, low, high);
     }
     else{
