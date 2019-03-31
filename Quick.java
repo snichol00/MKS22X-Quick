@@ -16,11 +16,13 @@ public class Quick{
     return start;
   }
 
-  if (data[start] > data[end] && data[start] < data[(end + start) / 2] || data[start] < data[end] && data[start] > data[(end + start) / 2]){
+  if (data[start] > data[end] && data[start] < data[(end + start) / 2] ||
+      data[start] < data[end] && data[start] > data[(end + start) / 2]){
     pVal = data[start];
     pIdx = start;
   }
-  else if (data[end] > data[start] && data[end] < data[(end + start) / 2] || data[end] < data[start] && data[end] > data[(end + start) / 2]){
+  else if (data[end] > data[start] && data[end] < data[(end + start) / 2] ||
+          data[end] < data[start] && data[end] > data[(end + start) / 2]){
     pVal = data[end];
     pIdx = end;
   }
@@ -122,5 +124,11 @@ public static void insertionsort(int[] data, int lo, int hi){
     }
     data[y+1] = xval;
   }
+}
+
+public static void main(String[] args) {
+  int[] data = {-1, 2, -1000, 67, 4, 2};
+  quicksort(data);
+  System.out.println(Arrays.toString(data));
 }
 }
